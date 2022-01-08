@@ -6,11 +6,12 @@
     border-top: 2px solid rgba(255, 255, 255, 0.3);
     border-left: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
-    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.8);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.7);
     height: 50px;
     align-items: center;
     color: white;
     width: 100%;
+    backdrop-filter: blur(20px);
 }
 
 /* Navbar Icon */

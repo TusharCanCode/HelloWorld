@@ -1,0 +1,10 @@
+.feedContainer {
+    height: 98%;
+    overflow-y: scroll;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

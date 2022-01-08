@@ -14,7 +14,6 @@ export default function Navbar() {
             <div className="navbarSearch">
                 <Search className='searchIcon' />
                 <InputBase placeholder='Search for friends, posts or videos' className='searchInput' />
-                {/* <input placeholder="Search for friends, posts or videos" className='searchInput' /> */}
             </div>
             <div className="navbarOptions">
                 <div className="navbarLinks">

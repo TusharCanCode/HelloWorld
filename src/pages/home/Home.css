@@ -10,9 +10,10 @@
 }
 
 .Feed {
-    flex: 6;
+    flex: 7;
+    padding-top: 4rem;
 }
 
 .Rightbar {
-    flex: 4;
+    flex: 3;
 }

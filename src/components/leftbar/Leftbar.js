@@ -4,7 +4,7 @@ import './Leftbar.css'
 
 export default function Leftbar() {
     return (
-        <div className="container">
+        <div className="leftbarContainer">
             <div className="item">
                 <Home className="icon" />
                 <Typography className="text">Home</Typography>
