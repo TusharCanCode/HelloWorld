@@ -17,6 +17,10 @@
     margin-bottom: 15px;
 }
 
+.shareHr {
+    border: 0.25px solid gray;
+}
+
 .shareProfile {
     width: 35px;
     height: 35px;
