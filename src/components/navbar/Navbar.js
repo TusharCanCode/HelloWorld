@@ -21,18 +21,24 @@ export default function Navbar() {
                     <span className="navbarLink">Timeline</span>
                 </div>
                 <div className="navbarIcons">
-                    <Badge badgeContent={50} color='secondary' className='navbarIconItem'>
-                        <Person />
-                    </Badge>
-                    <Badge badgeContent={50} color='secondary' className='navbarIconItem'>
-                        <Notifications />
-                    </Badge>
-                    <Badge badgeContent={50} color='secondary' className='navbarIconItem'>
-                        <Chat />
-                    </Badge>
+                    <span className="navbarIconItem">
+                        <Badge badgeContent={50} color='secondary' >
+                            <Person />
+                        </Badge>
+                    </span>
+                    <span className="navbarIconItem">
+                        <Badge badgeContent={50} color='secondary' >
+                            <Notifications />
+                        </Badge>
+                    </span>
+                    <span className="navbarIconItem">
+                        <Badge badgeContent={50} color='secondary' >
+                            <Chat />
+                        </Badge>
+                    </span>
                 </div>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" alt="profile" />
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }

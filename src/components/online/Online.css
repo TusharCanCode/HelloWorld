@@ -1,0 +1,36 @@
+.onlineFriend {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.onlineFriend:last-child {
+    margin: 0px;
+}
+
+.onlineFriendImage {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 13px;
+}
+
+.onlineFriend::before {
+    content: "";
+    background: lime;
+    position: absolute;
+    top: -4px;
+    left: 20px;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    border: 3px solid rgb(61, 60, 60);
+}
+
+.onlineFriendUsername {
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+}

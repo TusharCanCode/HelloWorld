@@ -9,7 +9,7 @@
 }
 
 .postWrapper {
-    padding: 15px;
+    padding: 15px 15px 10px 15px;
 }
 
 .postTop {
@@ -27,6 +27,7 @@
     height: 30px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .postUsername {
@@ -40,8 +41,12 @@
     color: rgb(160, 158, 158);
 }
 
+.postTopRight {
+    cursor: pointer;
+}
+
 .postMiddle {
-    margin: 15px 0;
+    margin: 15px 0 10px 0;
 }
 
 .postImage {
@@ -59,6 +64,14 @@
 .postBottomContents {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    padding: 5px 20px;
+    border-radius: 5px;
+    transition: all 0.2s ease-in;
+}
+
+.postBottomContents:hover {
+    background: rgba(255, 255, 255, 0.247);
 }
 
 .mr-8 {

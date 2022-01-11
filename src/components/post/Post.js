@@ -22,15 +22,15 @@ export default function Post() {
                 </div>
                 <div className="postBottom">
                     <div className="postBottomContents">
-                        <ThumbUpAlt className="postLike mr-8"/>
+                        <ThumbUpAlt className="postBottomIcon mr-8"/>
                         <span className="postBottomTexts">69 Likes</span>
                     </div>
                     <div className="postBottomContents" >
-                        <Comment className="postComment mr-8" />
+                        <Comment className="postBottomIcon mr-8" />
                         <span className="postBottomTexts">10 Comments</span>
                     </div>
                     <div className="postBottomContents">
-                        <Share className="postShare mr-8" />
+                        <Share className="postBottomIcon mr-8" />
                         <span className="postBottomTexts">12 Shares</span>
                     </div>
                 </div>

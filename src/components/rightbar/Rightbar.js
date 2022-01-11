@@ -1,4 +1,5 @@
 import { ImageList, ImageListItem } from '@material-ui/core'
+import Online from '../online/Online'
 import './Rightbar.css'
 
 export default function Rightbar() {
@@ -7,6 +8,7 @@ export default function Rightbar() {
             <div className="rightbarWrapper">
                 <div className="birthdayContainer">
                     <img className="birthdayImage" src="/gift-box.svg" alt='giftbox' />
+                    <span className="birthdayClose">x</span>
                     <span className="birthdayText">
                         <b>Sparsh Gupta</b> and <b>10 others</b> have their birthday today.
                     </span>
@@ -15,18 +17,9 @@ export default function Rightbar() {
                 <div className="onlineFriends">
                     <h3 className="onlineFriendsTitle">Online Friends</h3>
                     <ul className="onlineFriendsList">
-                        <li className="onlineFriend">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" alt="Online Friend" className="onlineFriendImage" />
-                            <span className="onlineFriendUsername">Sparsh Gupta</span>
-                        </li>
-                        <li className="onlineFriend">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" alt="Online Friend" className="onlineFriendImage" />
-                            <span className="onlineFriendUsername">Sparsh Gupta</span>
-                        </li>
-                        <li className="onlineFriend">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" alt="Online Friend" className="onlineFriendImage" />
-                            <span className="onlineFriendUsername">Sparsh Gupta</span>
-                        </li>
+                        <Online />
+                        <Online />
+                        <Online />
                     </ul>
                 </div>
 

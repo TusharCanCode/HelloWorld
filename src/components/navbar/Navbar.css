@@ -44,11 +44,11 @@
     align-items: center;
 }
 
-.navbarSearch:hover{
+.navbarSearch:hover {
     background-color: #3A3B50;
 }
 
-.navbarSearch:focus-within{
+.navbarSearch:focus-within {
     background-color: #3A3B50;
     border: 1px solid #34659e;
 }
@@ -77,12 +77,28 @@
 /* Navbar Links */
 .navbarLinks {
     font-size: 15px;
-    cursor: pointer;
 }
 
 .navbarLink {
     margin-right: 15px;
+    cursor: pointer;
+    position: relative;
 }
+
+.navbarLink::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    width: 0%;
+    left: 0px;
+    border-bottom: 3px solid white;
+    transition: all .25s linear;
+}
+
+.navbarLink:hover::after {
+    width: 100%;
+}
+
 
 /* Navbar Option Icons */
 .navbarIcons {
@@ -90,8 +106,16 @@
 }
 
 .navbarIconItem {
-    margin-right: 25px;
+    margin-right: 15px;
+    margin-top: 4px;
     cursor: pointer;
+    padding: 7px;
+    border-radius: 50%;
+    transition: all 0.25s ease-in;
+}
+
+.navbarIconItem:hover {
+    background: rgba(255, 255, 255, 0.247);
 }
 
 .navbarOptions>img {
