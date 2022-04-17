@@ -22,7 +22,7 @@ router.put('/:id', fetchUser, async (req, res) => {
         const post = await Post.findById(req.params.id);
         if (!post) return res.status(404).json({ error: { alert: "Not Found" } });
 
-        if (post.userId.toString() !== req.user.id)
+        if (post.userId.toString() !== req.user.id && !req.user.isAdmin)
             return res.status(403).json({ error: { alert: "You cannot edit this post" } });
 
         const updatedPost = await Post.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true, runValidators: true });
@@ -40,7 +40,7 @@ router.delete('/:id', fetchUser, async (req, res) => {
         const post = await Post.findById(req.params.id);
         if (!post) return res.status(404).json({ error: { alert: "Not Found" } });
 
-        if (post.userId.toString() !== req.user.id)
+        if (post.userId.toString() !== req.user.id && !req.user.isAdmin)
             return res.status(403).json({ error: { alert: "You cannot delete this post" } });
 
         await Post.findByIdAndDelete(req.params.id);
@@ -83,7 +83,21 @@ router.get('/:id', fetchUser, async (req, res) => {
     }
 });
 
-//Route-6: Getting timline posts
+//Route-6: Getting an user's all posts
+router.get('/profile/:userID', fetchUser, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userID);
+        if (!user) return res.status(404).json({ error: { alert: "Not Found" } });
+
+        const userPosts = await Post.find({ userId: user.id });
+        return res.status(200).json(userPosts);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error });
+    }
+})
+
+//Route-7: Getting timline posts
 router.get('/timeline/allPosts', fetchUser, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -98,7 +112,6 @@ router.get('/timeline/allPosts', fetchUser, async (req, res) => {
 
         return res.status(200).json(userPosts.concat(...friendPosts));
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ error });
     }
 })

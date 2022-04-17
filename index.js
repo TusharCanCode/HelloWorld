@@ -10,24 +10,24 @@ const cookieParser = require('cookie-parser');
 app.use(morgan("common"));
 app.use(helmet());
 app.use(express.json());
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 
 //Routers:
 const userRotue = require('./routes/users');
 const authorizationRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
+const conversationRoute = require('./routes/conversation');
+const messageRoute = require('./routes/message');
 
 //API routes:
 app.use('/api/users', userRotue);
 app.use('/api/auth', authorizationRoute);
 app.use('/api/posts', postRoute);
-
+app.use('/api/conversations', conversationRoute);
+app.use('/api/message', messageRoute);
 
 connection();
-app.get('/', (req, res) => {
-    res.send("Hello");
-})
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log('The server is running successfully!');
 })

@@ -43,7 +43,7 @@ router.delete('/:id', fetchuser, async (req, res) => {
 //Route-3: Getting details of an existing user
 router.get('/:id', fetchuser, async (req, res) => {
     try {
-        let user = await User.findById(req.user.id);
+        let user = await User.findById(req.params.id);
         if (!user)
             return res.status(404).json({ error: { alert: "Not Found" } });
 
@@ -97,6 +97,20 @@ router.put('/:id/unfollow', fetchuser, async (req, res) => {
     }
     else
         return res.status(403).json({ error: { alert: "You cannot unfollow yourself" } })
+});
+
+//Route-5: Current User
+router.get('/', fetchuser, async (req, res) => {
+    try {
+        let user = await User.findById(req.user.id);
+        if (!user)
+            return res.status(404).json({ error: { alert: "Not Found" } });
+
+        const { password, updatedAt, ...other } = user._doc;
+        return res.status(200).json(other);
+    } catch (error) {
+        return res.status(500).json({ error: { alert: "Internal Server error" } });
+    }
 });
 
 //Utility Functions
