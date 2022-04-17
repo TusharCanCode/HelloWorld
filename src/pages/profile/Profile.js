@@ -3,7 +3,10 @@ import Navbar from '../../components/navbar/Navbar'
 import Rightbar from '../../components/rightbar/Rightbar'
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 import Avatar from "@material-ui/core/Avatar";
-import './Profile.css'
+import './Profile.css';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { createStyles, makeStyles } from '@material-ui/core';
 
 const styles = makeStyles((theme) => createStyles({
@@ -17,6 +20,16 @@ const styles = makeStyles((theme) => createStyles({
 }));
 export default function Profile() {
     const classes = styles();
+    const assets = process.env.REACT_APP_PUBLIC_FOLDER;
+    const [user, setUser] = useState({});
+    const userID = useParams().userID;
+    useEffect(() => {
+        async function fetchUser() {
+            const response = await axios.get(`/users/${userID}`, { withCredentials: true });
+            setUser(response.data);
+        };
+        fetchUser();
+    }, [userID]);
     return (
         <>
             <Navbar />
@@ -24,12 +37,12 @@ export default function Profile() {
                 <div className="profileTop">
                     <div className="profileCover">
                         <div className="profileCoverWrapper">
-                            <img className="profileCoverImage" src="https://i.pinimg.com/736x/db/12/9d/db129ddf0cbbcf67f69a2cf101d87cc3.jpg" alt="Profile Cover" />
-                            <h2 className="userDescription">"I am bored"</h2>
+                            <img className="profileCoverImage" src={user.coverPicture ? user.coverPicture : assets + 'NoCoverPic.jpg'} alt="Profile Cover" />
+                            <h2 className="userDescription">{user.description ? `"${user.description}"` : ''}</h2>
                             <div className="profileDescription">
-                                <img className="profileImage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" alt="profile" />
+                                <img className="profileImage" src={user.profilePicture ? user.profilePicture : assets + 'NoProfilePic.png'} alt="profile" />
                                 <div className="profileAbout">
-                                    <h2>Tushar Bharti</h2>
+                                    <h2>{user.firstName + ' ' + user.lastName}</h2>
                                     <h5>8 Friends</h5>
                                     <AvatarGroup classes={{ avatar: classes.avatar }} max={4}>
                                         <Avatar alt="Remy Sharp" src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png" />
@@ -49,10 +62,10 @@ export default function Profile() {
                 <div className="profileBottom">
                     <div className="profileBottomWrapper">
                         <div className="profileBottomLeft">
-                            <Feed />
+                            <Feed userID={userID} />
                         </div>
                         <div className="profileBottomRight">
-                            <Rightbar profile />
+                            <Rightbar user={user} />
                         </div>
                     </div>
                 </div>

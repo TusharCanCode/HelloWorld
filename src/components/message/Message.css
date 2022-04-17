@@ -1,0 +1,42 @@
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.messageTop {
+    display: flex;
+}
+
+.messageImage {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.messageText {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(209, 207, 207);
+    color: rgb(19, 17, 17);
+    max-width: 350px;
+    font-weight: 500;
+}
+
+.messageBottom {
+    margin-top: 8px;
+    font-size: 14px;
+    color: gainsboro;
+}
+
+.own {
+    align-items: flex-end;
+}
+
+.own .messageText {
+    background-color: rgb(248, 132, 1);
+    color: white;
+}

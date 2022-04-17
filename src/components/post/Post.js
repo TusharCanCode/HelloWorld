@@ -1,28 +1,43 @@
 import { Comment, MoreVert, Share, ThumbUpAlt } from '@material-ui/icons'
-
+import { useEffect, useState } from 'react';
+import { format } from 'timeago.js';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Post.css'
 
-export default function Post() {
+export default function Post({ post }) {
+    const assets = process.env.REACT_APP_PUBLIC_FOLDER;
+    const [user, setUser] = useState({});
+    useEffect(() => {
+        async function fetchUser() {
+            const response = await axios.get(`/users/${post.userId}`, { withCredentials: true });
+            setUser(response.data);
+            console.log(response.data);
+        };
+        fetchUser();
+    }, [post.userId]);
     return (
         <div className="postContainer">
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img className="postProfile" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" alt="profile" />
-                        <span className="postUsername">Tushar Bharti</span>
-                        <span className="postDuration">11 hours ago</span>
+                        <Link to={`/profile/${user._id}`}>
+                            <img className="postProfile" src={user.profilePicture ? user.profilePicture : assets + 'NoProfilePic.png'} alt="profile" />
+                        </Link>
+                        <span className="postUsername">{user.firstName + ' ' + user.lastName}</span>
+                        <span className="postDuration">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVert />
                     </div>
                 </div>
                 <div className="postMiddle">
-                    <span className="postText">This is my very first post ;)</span>
-                    <img src="https://spoilerguy.com/wp-content/uploads/2021/05/attack-on-titan-1258846-1280x0-1.jpeg" alt="Post" className="postImage" />
+                    <span className="postText" style={(post.image) ? {} : { fontSize: '20px' }}>{post.description}</span>
+                    {post.image && <img src={post.image} alt="Post" className="postImage" />}
                 </div>
                 <div className="postBottom">
                     <div className="postBottomContents">
-                        <ThumbUpAlt className="postBottomIcon mr-8"/>
+                        <ThumbUpAlt className="postBottomIcon mr-8" />
                         <span className="postBottomTexts">69 Likes</span>
                     </div>
                     <div className="postBottomContents" >

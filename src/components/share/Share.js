@@ -1,13 +1,16 @@
 import { EmojiEmotions, Label, PermMedia, Room } from '@material-ui/icons'
+import { useContext } from 'react'
+import { AuthContext } from '../../Context/AuthContext'
 import './Share.css'
 
 export default function Share() {
+    const {user} = useContext(AuthContext);
     return (
         <div className='shareContainer'>
             <div className="shareWrapper">
                 <div className="shareTop">
                     <img className="shareProfile" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1024px-Circle-icons-profile.svg.png" alt="profile" />
-                    <input className="shareInput" placeholder="Let your thoughts spread Tushar" />
+                    <input className="shareInput" placeholder={`Let your thoughts spread ${user.firstName}`} />
                 </div>
                 <hr className="shareHr" />
                 <div className="shareBottom">

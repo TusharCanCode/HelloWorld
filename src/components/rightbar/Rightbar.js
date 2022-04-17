@@ -2,7 +2,7 @@ import { ImageList, ImageListItem } from '@material-ui/core'
 import Online from '../online/Online'
 import './Rightbar.css'
 
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
     const HomePageRightbar = () => {
         return (
             <>
@@ -59,19 +59,19 @@ export default function Rightbar({ profile }) {
                     <h2 className='userInfoTitle'>User Information</h2>
                     <div className="userDatasets">
                         <span className="userDatasetKey">Name:</span>
-                        <span className="userDatasetValue">Tushar Bharti</span>
+                        <span className="userDatasetValue">{user.firstName + ' ' + user.lastName}</span>
                     </div>
                     <div className="userDatasets">
                         <span className="userDatasetKey">From:</span>
-                        <span className="userDatasetValue">India</span>
+                        <span className="userDatasetValue">{user.from ? user.from : '-'}</span>
                     </div>
                     <div className="userDatasets">
                         <span className="userDatasetKey">City:</span>
-                        <span className="userDatasetValue">New Delhi</span>
+                        <span className="userDatasetValue">{user.city ? user.city : '-'}</span>
                     </div>
                     <div className="userDatasets">
                         <span className="userDatasetKey">Relationship:</span>
-                        <span className="userDatasetValue">Single</span>
+                        <span className="userDatasetValue">{user.relationship === 1 ? 'Single' : user.relationship === 2 ? 'Married' : '-'}</span>
                     </div>
                 </div>
                 <hr className="rightbarBorder" />
@@ -132,7 +132,7 @@ export default function Rightbar({ profile }) {
         <div className="rightbarContainer">
             <div className="rightbarWrapper">
                 {
-                    profile ? <ProfilePageRightbar /> : <HomePageRightbar />
+                    user ? <ProfilePageRightbar /> : <HomePageRightbar />
                 }
             </div>
         </div>

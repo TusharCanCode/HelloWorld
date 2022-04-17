@@ -9,6 +9,10 @@
     margin: 0px;
 }
 
+.onlineFriendImageContent {
+    position: relative;
+}
+
 .onlineFriendImage {
     width: 30px;
     height: 30px;
@@ -17,8 +21,7 @@
     margin-right: 13px;
 }
 
-.onlineFriend::before {
-    content: "";
+.onlineFriendBadge{
     background: lime;
     position: absolute;
     top: -4px;
@@ -33,4 +36,14 @@
     font-size: 18px;
     font-weight: 400;
     color: white;
+}
+
+.chatOnlineFriendsTitle {
+    color: white;
+    font-size: 25px;
+    text-align: center;
+}
+
+.chatOnlineFriendsList {
+    padding-top: 20px;
 }
