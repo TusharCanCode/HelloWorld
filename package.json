@@ -1,0 +1,17 @@
+{
+  "name": "socket_server",
+  "version": "1.0.0",
+  "description": "This package is created for the making of th socket server.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Tushar Bharti",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "mongoose": "^6.3.3",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.4.1"
+  }
+}
