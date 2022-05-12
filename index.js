@@ -19,6 +19,7 @@ const authorizationRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 const conversationRoute = require('./routes/conversation');
 const messageRoute = require('./routes/message');
+const searchRoute = require('./routes/search');
 
 //API routes:
 app.use('/api/users', userRotue);
@@ -26,6 +27,7 @@ app.use('/api/auth', authorizationRoute);
 app.use('/api/posts', postRoute);
 app.use('/api/conversations', conversationRoute);
 app.use('/api/message', messageRoute);
+app.use('/api/search', searchRoute);
 
 connection();
 app.listen(process.env.PORT || 5000, () => {

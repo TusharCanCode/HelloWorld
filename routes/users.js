@@ -69,7 +69,7 @@ router.put('/:id/follow', fetchuser, async (req, res) => {
 
             await currentUser.updateOne({ $push: { following: user.id } });
             await user.updateOne({ $push: { followers: currentUser.id } });
-            return res.status(403).json({ message: { alert: "User has been followed" } });
+            return res.status(200).json({ message: { alert: "User has been followed" } });
         } catch (error) {
             return res.status(500).json({ error: { alert: "Internal Server error" } });
         }
@@ -90,7 +90,7 @@ router.put('/:id/unfollow', fetchuser, async (req, res) => {
 
             await currentUser.updateOne({ $pull: { following: user.id } });
             await user.updateOne({ $pull: { followers: currentUser.id } });
-            return res.status(403).json({ message: { alert: "User has been unfollowed" } });
+            return res.status(200).json({ message: { alert: "User has been unfollowed" } });
         } catch (error) {
             return res.status(500).json({ error: { alert: "Internal Server error" } });
         }
@@ -108,6 +108,48 @@ router.get('/', fetchuser, async (req, res) => {
 
         const { password, updatedAt, ...other } = user._doc;
         return res.status(200).json(other);
+    } catch (error) {
+        return res.status(500).json({ error: { alert: "Internal Server error" } });
+    }
+});
+
+//Route-6: Getting an user's followings
+router.get('/followings/:id', fetchuser, async(req, res)=>{
+    try {
+        const user = await User.findById(req.params.id);
+        const friends = await Promise.all(
+            user.following.map(friendId=>{
+                return User.findById(friendId);
+            })
+        )
+
+        let friendList = [];
+        friends.map(friend=>{
+            const {firstName, lastName, profilePicture, _id} = friend;
+            friendList.push({firstName, lastName, profilePicture, _id});
+        })
+        return res.status(200).json(friendList);
+    } catch (error) {
+        return res.status(500).json({ error: { alert: "Internal Server error" } });
+    }
+});
+
+//Route-7: Getting an user's followers
+router.get('/followers/:id', fetchuser, async(req, res)=>{
+    try {
+        const user = await User.findById(req.params.id);
+        const friends = await Promise.all(
+            user.followers.map(friendId=>{
+                return User.findById(friendId);
+            })
+        )
+
+        let friendList = [];
+        friends.map(friend=>{
+            const {firstName, lastName, profilePicture, _id} = friend;
+            friendList.push({firstName, lastName, profilePicture, _id});
+        })
+        return res.status(200).json(friendList);
     } catch (error) {
         return res.status(500).json({ error: { alert: "Internal Server error" } });
     }
