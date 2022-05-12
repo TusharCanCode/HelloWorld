@@ -1,8 +1,37 @@
 import { ImageList, ImageListItem } from '@material-ui/core'
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Online from '../online/Online'
 import './Rightbar.css'
 
 export default function Rightbar({ user }) {
+    const [followings, setFollowings] = useState([]);
+    const [followers, setFollowers] = useState([]);
+    useEffect(() => {
+        if (user && user._id) {
+            console.log("user: ", user);
+            const getFollowings = async () => {
+                try {
+                    const response = await axios.get('/users/followings/' + user._id, { withCredentials: true });
+                    setFollowings(response.data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            const getFollowers = async () => {
+                try {
+                    const response = await axios.get('/users/followers/' + user._id, { withCredentials: true });
+                    setFollowers(response.data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            getFollowers();
+            getFollowings();
+        }
+    }, [user])
     const HomePageRightbar = () => {
         return (
             <>
@@ -59,49 +88,62 @@ export default function Rightbar({ user }) {
                     <h2 className='userInfoTitle'>User Information</h2>
                     <div className="userDatasets">
                         <span className="userDatasetKey">Name:</span>
-                        <span className="userDatasetValue">{user.firstName + ' ' + user.lastName}</span>
+                        <span className="userDatasetValue">{user && (user.firstName + ' ' + user.lastName)}</span>
                     </div>
                     <div className="userDatasets">
                         <span className="userDatasetKey">From:</span>
-                        <span className="userDatasetValue">{user.from ? user.from : '-'}</span>
+                        <span className="userDatasetValue">{user && (user.from ? user.from : '-')}</span>
                     </div>
                     <div className="userDatasets">
                         <span className="userDatasetKey">City:</span>
-                        <span className="userDatasetValue">{user.city ? user.city : '-'}</span>
+                        <span className="userDatasetValue">{user && (user.city ? user.city : '-')}</span>
                     </div>
                     <div className="userDatasets">
                         <span className="userDatasetKey">Relationship:</span>
-                        <span className="userDatasetValue">{user.relationship === 1 ? 'Single' : user.relationship === 2 ? 'Married' : '-'}</span>
+                        <span className="userDatasetValue">{user && (user.relationship === 1 ? 'Single' : user.relationship === 2 ? 'Married' : '-')}</span>
                     </div>
                 </div>
-                <hr className="rightbarBorder" />
-                <div className="userFriendsList">
-                    <h2 className="userFriendsTitle">Friends</h2>
-                    <div className="userFriendListWrapper">
-                        <div className="userFriend">
-                            <img className="userFriendImage" src="https://imgix.ranker.com/user_node_img/69/1374288/original/killua-zaoldyeck-photo-u21?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375" alt="Friend" />
-                            <span className="userFriendName">Killua Zoldyck</span>
+                {
+                    followers.length > 0 && <>
+                        <hr className="rightbarBorder" />
+                        <div className="userFriendsList">
+                            <h2 className="userFriendsTitle">{`Followers (${followers.length})`}</h2>
+                            <div className="userFriendListWrapper">
+                                {
+                                    followers.map(follower => (
+                                        <Link to={`/profile/${follower._id}`} style={{ textDecoration: 'none', color: 'white' }} key={follower._id}>
+                                            <div className="userFriend">
+                                                <img className="userFriendImage" src={follower.profilePicture ? follower.profilePicture : "https://imgix.ranker.com/user_node_img/69/1374288/original/killua-zaoldyeck-photo-u21?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375"} alt="Friend" />
+                                                <span className="userFriendName">{follower.firstName + ' ' + follower.lastName}</span>
+                                            </div>
+                                        </Link>
+                                    ))
+                                }
+                            </div>
                         </div>
-                        <div className="userFriend">
-                            <img className="userFriendImage" src="https://imgix.ranker.com/user_node_img/69/1374288/original/killua-zaoldyeck-photo-u21?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375" alt="Friend" />
-                            <span className="userFriendName">Killua Zoldyck</span>
+                    </>
+                }
+                {
+                    followings.length > 0 && <>
+                        <hr className="rightbarBorder" />
+                        <div className="userFriendsList">
+                            <h2 className="userFriendsTitle">{`Following (${followings.length})`}</h2>
+                            <div className="userFriendListWrapper">
+                                {
+                                    followings.map(follower => (
+                                        <Link to={`/profile/${follower._id}`} style={{ textDecoration: 'none', color: 'white' }} key={follower._id}>
+                                            <div className="userFriend">
+                                                <img className="userFriendImage" src={follower.profilePicture ? follower.profilePicture : "https://imgix.ranker.com/user_node_img/69/1374288/original/killua-zaoldyeck-photo-u21?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375"} alt="Friend" />
+                                                <span className="userFriendName">{follower.firstName + ' ' + follower.lastName}</span>
+                                            </div>
+                                        </Link>
+                                    ))
+                                }
+                            </div>
                         </div>
-                        <div className="userFriend">
-                            <img className="userFriendImage" src="https://imgix.ranker.com/user_node_img/69/1374288/original/killua-zaoldyeck-photo-u21?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375" alt="Friend" />
-                            <span className="userFriendName">Killua Zoldyck</span>
-                        </div>
-                        <div className="userFriend">
-                            <img className="userFriendImage" src="https://imgix.ranker.com/user_node_img/69/1374288/original/killua-zaoldyeck-photo-u21?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375" alt="Friend" />
-                            <span className="userFriendName">Killua Zoldyck</span>
-                        </div>
-                        <div className="userFriend">
-                            <img className="userFriendImage" src="https://imgix.ranker.com/user_node_img/69/1374288/original/killua-zaoldyeck-photo-u21?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375" alt="Friend" />
-                            <span className="userFriendName">Killua Zoldyck</span>
-                        </div>
-                    </div>
-                </div>
-                <hr className="rightbarBorder" />
-                <div className="gallery">
+                    </>
+                }
+                {/* <div className="gallery">
                     <h2 className="galleryTitle">Gallery</h2>
                     <ImageList sx={{ width: 450, height: 400 }} cols={2} rowHeight={164} style={{ marginTop: 15 }}>
                         <ImageListItem>
@@ -123,7 +165,7 @@ export default function Rightbar({ user }) {
                             />
                         </ImageListItem>
                     </ImageList>
-                </div>
+                </div> */}
             </>
         )
     };

@@ -96,6 +96,8 @@
     flex-direction: column;
     cursor: pointer;
     margin: 6px 5px;
+    width: 152px;
+    word-wrap: break-word;
 }
 
 .userFriendImage {
@@ -109,4 +111,8 @@
 
 .userFriendImage:hover {
     transform:scale(1.1);
+}
+
+.userFriendName {
+    font-size: 18px;
 }

@@ -1,12 +1,20 @@
 import './Navbar.css';
 import { Search, Person, Notifications, Chat } from '@material-ui/icons';
 import { Badge, InputBase } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 
 export default function Navbar() {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [searchItem, setsearchItem] = useState("")
+    const handleSubmit = (e)=>{
+        if(e.keyCode === 13 && searchItem !== "")
+        {
+            navigate(`/search/${searchItem}`)
+        }
+    }
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     return (
         <div className="navbarContainer">
@@ -20,7 +28,7 @@ export default function Navbar() {
             </div>
             <div className="navbarSearch">
                 <Search className='searchIcon' />
-                <InputBase placeholder='Search for friends, posts or videos' className='searchInput' />
+                <InputBase placeholder='Search for first name, last name, username' className='searchInput' onChange={(e)=>setsearchItem(e.target.value)} onKeyUp={(e)=>handleSubmit(e)}/>
             </div>
             <div className="navbarOptions">
                 <div className="navbarLinks">
@@ -39,7 +47,7 @@ export default function Navbar() {
                         </Badge>
                     </span>
                     <span className="navbarIconItem">
-                        <Link to="/chat">
+                        <Link to="/chat" style={{textDecoration: 'none', color: 'white'}}>
                             <Badge badgeContent={50} color='secondary' >
                                 <Chat />
                             </Badge>

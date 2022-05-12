@@ -119,3 +119,10 @@
 .chatMenuSearch:hover, .chatMenuSearch:focus-within, .chatBoxMessage:focus-within {
     background-color: #3A3B50;
 }
+
+.newConvo{
+    font-size: 70px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    color:rgba(253, 251, 251, 0.3)
+}

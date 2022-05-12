@@ -67,11 +67,6 @@
     cursor: pointer;
     padding: 5px 20px;
     border-radius: 5px;
-    transition: all 0.2s ease-in;
-}
-
-.postBottomContents:hover {
-    background: rgba(255, 255, 255, 0.247);
 }
 
 .mr-8 {

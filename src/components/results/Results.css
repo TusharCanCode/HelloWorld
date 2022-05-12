@@ -1,0 +1,66 @@
+.resultsContainer {
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    backdrop-filter: blur(20px);
+    height: 97%;
+    overflow: scroll;
+}
+
+.resultsWrapper {
+    padding: 0px 50px 10px 50px;
+}
+
+.resultsHeading {
+    font-size: 35px;
+}
+
+.searchResultProfilePic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.searchResultName {
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.searchResult{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 45px;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.7);
+    padding: 10px 50px 10px 20px;
+    margin-top: 15px;
+}
+
+.searchResultLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchResultRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchResultStatus{
+    border: 1.5px solid white;
+    border-radius: 25px;
+    padding: 5px 15px;
+    margin-right: 20px;
+}
+
+.searchResultView{
+    font-size: 30px;
+    cursor: pointer;
+    color:white;
+}

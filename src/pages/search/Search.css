@@ -1,0 +1,16 @@
+.homeContainer {
+    width: 100%;
+    display: flex;
+    height: calc(100vh - 52px);
+}
+
+.Leftbar {
+    flex: 2;
+    margin-top: 1rem;
+}
+
+
+.Results {
+    flex: 10;
+    margin-top: 1rem;
+}

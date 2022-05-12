@@ -1,13 +1,25 @@
-import { Comment, MoreVert, Share, ThumbUpAlt } from '@material-ui/icons'
-import { useEffect, useState } from 'react';
+import { Comment, Favorite, FavoriteBorder, MoreVert, Share } from '@material-ui/icons'
+import { useContext, useEffect, useState } from 'react';
 import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Post.css'
+import { Checkbox } from '@material-ui/core';
+import { AuthContext } from '../../Context/AuthContext'
 
 export default function Post({ post }) {
+    const [totalLikes, setTotalLikes] = useState(post.likes.length);
     const assets = process.env.REACT_APP_PUBLIC_FOLDER;
     const [user, setUser] = useState({});
+    const { user: currentUser } = useContext(AuthContext);
+    const [liked, setLiked] = useState(false);
+
+    useEffect(() => {
+        if (post.likes.includes(currentUser._id))
+            setLiked(true);
+    }, [currentUser._id, post.likes])
+
+
     useEffect(() => {
         async function fetchUser() {
             const response = await axios.get(`/users/${post.userId}`, { withCredentials: true });
@@ -16,6 +28,18 @@ export default function Post({ post }) {
         };
         fetchUser();
     }, [post.userId]);
+
+    const likeHandler = async () => {
+        console.log("wtf");
+        try {
+            await axios.put(`/posts/${post._id}/likeDislike`, { withCredentials: true });
+        } catch (error) {
+            console.log(error);
+        }
+        setTotalLikes(liked ? totalLikes - 1 : totalLikes + 1);
+        setLiked(!liked);
+    }
+
     return (
         <div className="postContainer">
             <div className="postWrapper">
@@ -37,8 +61,8 @@ export default function Post({ post }) {
                 </div>
                 <div className="postBottom">
                     <div className="postBottomContents">
-                        <ThumbUpAlt className="postBottomIcon mr-8" />
-                        <span className="postBottomTexts">69 Likes</span>
+                        <Checkbox checked={liked} color='secondary' icon={<FavoriteBorder color="secondary" />} checkedIcon={<Favorite />} onClick={likeHandler} />
+                        <span className="postBottomTexts">{`${totalLikes} Likes`}</span>
                     </div>
                     <div className="postBottomContents" >
                         <Comment className="postBottomIcon mr-8" />

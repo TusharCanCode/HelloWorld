@@ -99,3 +99,30 @@
     color: green;
     background-color: white;
 }
+
+.shareOptionButton:disabled {
+    pointer-events: none;
+    background-color: rgba(6, 130, 6, 0.292);
+}
+
+.imageFileContainer {
+    position: relative;
+    padding-top: 10px;
+}
+
+.imageFileImg {
+    width: 100%;
+    object-fit: cover;
+}
+
+.cancelImage {
+    position: absolute;
+    top: 10px;
+    right: 6px;
+    opacity: 0.6;
+    color: black;
+}
+
+.cancelImage:hover {
+    opacity: 1;
+}
