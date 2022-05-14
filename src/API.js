@@ -21,10 +21,11 @@ export const register = async (user, dispatch) => {
     }
 }
 
-export const follow = async (userId, dispatch) => {
+export const follow = async (userId,currentUserID, dispatch) => {
     dispatch(followStart());
     try {
         await axios.put(`/users/${userId}/follow`, {withCredentials: true});
+        await axios.post(`/conversations/`, { firstID: currentUserID, secondID: userId }, { withCredentials: true });
         dispatch(followSuccess(userId));
     } catch (error) {
         dispatch(followFailure(error));

@@ -45,7 +45,7 @@ export default function Profile() {
             if (followed)
                 unfollow(userID, dispatch);
             else
-                follow(userID, dispatch);
+                follow(userID, currentUser._id, dispatch);
         }
     }
     console.log("followed: ", followed);
