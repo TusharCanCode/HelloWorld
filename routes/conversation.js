@@ -5,15 +5,27 @@ const fetchUser = require('../middleware/fetchuser');
 
 //Route-1: Create a new conversation
 router.post('/', fetchUser, async (req, res) => {
-    try {
-        req.body.senderID = req.user.id;
-        const conversation = await Conversation.create({
-            users: [req.body.senderID, req.body.receiverID]
-        });
-        res.status(200).json(conversation);
+    if (req.user.id === req.body.firstID || req.user.isAdmin) {
+        try {
+            const conversations = await Conversation.findOne({
+                users: { $all: [req.body.firstID, req.body.secondID], }
+            });
 
-    } catch (error) {
-        return res.status(400).json({ error });
+            if (!conversations) 
+            {
+                const conversation = await Conversation.create({
+                    users: [req.body.firstID, req.body.secondID]
+                });
+                return res.status(200).json(conversation)
+            }
+            else
+                return res.status(200).json({});
+
+        } catch (error) {
+            return res.status(500).json({ error });
+        }
+    } else {
+        return res.status(403).json({ error: { alert: "Cannot create the conversations!" } })
     }
 })
 

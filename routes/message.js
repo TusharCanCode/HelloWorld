@@ -15,7 +15,7 @@ router.post('/', fetchUser, async (req, res) => {
     }
 });
 
-//Route-2: Create existing messages
+//Route-2: Find existing messages
 router.get('/:conversationID', fetchUser, async (req, res) => {
     try {
         req.params.conversationID = mongoose.Types.ObjectId(req.params.conversationID);
