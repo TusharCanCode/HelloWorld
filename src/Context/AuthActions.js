@@ -53,3 +53,17 @@ export const unfollowFailure = (error) => ({
     type: "UNFOLLOW_FAILURE",
     payload: error,
 })
+
+export const checkUserStart = () => ({
+    type: "CHECK_USER_START",
+})
+
+export const checkUserSuccess = (user) => ({
+    type: "CHECK_USER_SUCESS",
+    payload: user,
+})
+
+export const checkUserFailure = (error) => ({
+    type: "CHECK_USER_FAILURE",
+    payload: error,
+})

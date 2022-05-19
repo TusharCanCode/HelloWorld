@@ -8,12 +8,16 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./Context/AuthContext";
 import Search from "./pages/search/Search";
+import { getUser } from "./API"
 
 function App() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
+  useEffect(() => {
+    getUser(dispatch);
+  }, [])
   return (
     <>
       <Router>

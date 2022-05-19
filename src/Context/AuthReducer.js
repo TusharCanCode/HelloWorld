@@ -90,6 +90,27 @@ const AuthReducer = (state, action) => {
                 error: action.payload
             }
 
+            case "CHECK_USER_START":
+                return {
+                    user: state.user,
+                    isFetching: true,
+                    error: false
+                }
+    
+            case "CHECK_USER_SUCESS":
+                return {
+                    user: action.payload,
+                    isFetching: false,
+                    error: false
+                }
+    
+            case "CHECK_USER_FAILURE":
+                return {
+                    user: state.user,
+                    isFetching: false,
+                    error: action.payload
+                }
+
         default:
             return state;
     }
